@@ -1,4 +1,6 @@
-## memcached [![Build Status](https://travis-ci.org/Oefenweb/ansible-memcached.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-memcached) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-memcached-blue.svg)](https://galaxy.ansible.com/list#/roles/1354)
+## memcached
+
+[![Build Status](https://travis-ci.org/Oefenweb/ansible-memcached.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-memcached) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-memcached-blue.svg)](https://galaxy.ansible.com/list#/roles/1354)
 
 Set up a memcached server in Debian-like systems.
 
