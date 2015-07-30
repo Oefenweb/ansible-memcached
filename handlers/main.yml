@@ -1,5 +1,5 @@
----
 # handlers file for memcached
+---
 - name: restart memcached
   service:
     name: memcached

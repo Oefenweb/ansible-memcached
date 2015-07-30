@@ -1,10 +1,11 @@
----
 # tasks file for memcached
+---
 - name: install package
   apt:
     name: memcached
     state: latest
-    update_cache: yes
+    update_cache: true
+    cache_valid_time: 3600
   tags: [configuration, memcached, memcached-install]
 
 - name: update configuration file

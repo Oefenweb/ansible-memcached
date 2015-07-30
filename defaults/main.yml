@@ -1,5 +1,5 @@
----
 # defaults file for memcached
+---
 memcached_logfile: /var/log/memcached.log
 memcached_host: 127.0.0.1
 memcached_port: 11211

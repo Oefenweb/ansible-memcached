@@ -29,7 +29,7 @@ None
 ---
 - hosts: all
   roles:
-  - memcached
+    - memcached
 ```
 
 #### License
