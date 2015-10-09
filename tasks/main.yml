@@ -22,7 +22,7 @@
   sysctl:
     name: fs.file-max
     value: "{{ memcached_fs_file_max }}"
-    reload: yes
+    reload: true
     state: present
   when: memcached_fs_file_max != false
   tags: [configuration, memcached, memcached-fs-file-max]
@@ -31,7 +31,7 @@
   sysctl:
     name: net.ipv4.ip_local_port_range
     value: "{{ memcached_net_ipv4_ip_local_port_range }}"
-    reload: yes
+    reload: true
     state: present
   when: memcached_net_ipv4_ip_local_port_range != false
   tags: [configuration, memcached, memcached-local-port-range]
@@ -40,5 +40,5 @@
   service:
     name: memcached
     state: started
-    enabled: yes
+    enabled: true
   tags: [configuration, memcached, memcached-start-enable-service]
