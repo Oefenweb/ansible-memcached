@@ -28,7 +28,7 @@ logfile {{ memcached_logfile }}
 # -u command is present in this config file
 -u {{ memcached_user }}
 
-{% if memcached_socket is defined %}
+{% if memcached_socket_file is defined %}
 -s {{ memcached_socket_file }}
 -a {{ memcached_socket_perms | default('0666') }}
 {% else %}
