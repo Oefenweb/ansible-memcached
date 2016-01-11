@@ -11,7 +11,7 @@ None
 #### Variables
 
  * `memcached_logfile` [default: `/var/log/memcached.log`]: Log output to
- * `memcached_socket_file` [optional]: Unix socket path to listen on (disables network support) (e.g. `run/memcached/memcached.sock`)
+ * `memcached_socket_file` [optional]: Unix socket path to listen on (disables network support) (e.g. `/run/memcached/memcached.sock`)
  * `memcached_socket_perms` [optional, default: `0666`]: Permissions (in octal format) for Unix socket created
  * `memcached_host` [default: `127.0.0.1`]: The IP address on which the server should be listening
  * `memcached_port` [default: `11211`]: The port on which the server should be listening
