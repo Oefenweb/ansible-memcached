@@ -15,7 +15,7 @@
   file:
     path: "{{ memcached_socket_file | dirname }}"
     state: directory
-    owner: root
+    owner: "{{ memcached_user }}"
     group: root
     mode: 0755
   when: memcached_socket is defined
