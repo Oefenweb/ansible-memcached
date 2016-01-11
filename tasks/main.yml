@@ -18,7 +18,7 @@
     owner: "{{ memcached_user }}"
     group: root
     mode: 0755
-  when: memcached_socket is defined
+  when: memcached_socket_file is defined
   tags:
     - configuration
     - memcached

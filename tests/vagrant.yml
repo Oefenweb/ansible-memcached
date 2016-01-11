@@ -5,3 +5,5 @@
   sudo: true
   roles:
     - ../../
+  vars:
+    memcached_socket_file: /run/memcached/memcached.sock
