@@ -6,7 +6,23 @@
     state: latest
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  tags: [configuration, memcached, memcached-install]
+  tags:
+    - configuration
+    - memcached
+    - memcached-install
+
+- name: create (socket) directory
+  file:
+    path: "{{ memcached_socket_file | dirname }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  when: memcached_socket is defined
+  tags:
+    - configuration
+    - memcached
+    - memcached-create-socket-directory
 
 - name: update configuration file
   template:
@@ -16,7 +32,10 @@
     group: root
     mode: 0644
   notify: restart memcached
-  tags: [configuration, memcached, memcached-configuration]
+  tags:
+    - configuration
+    - memcached
+    - memcached-configuration
 
 - name: set system file descriptor limit
   sysctl:
@@ -25,7 +44,10 @@
     reload: true
     state: present
   when: memcached_fs_file_max != false
-  tags: [configuration, memcached, memcached-fs-file-max]
+  tags:
+    - configuration
+    - memcached
+    - memcached-fs-file-max
 
 - name: set system ip port limits
   sysctl:
@@ -34,11 +56,17 @@
     reload: true
     state: present
   when: memcached_net_ipv4_ip_local_port_range != false
-  tags: [configuration, memcached, memcached-local-port-range]
+  tags:
+    - configuration
+    - memcached
+    - memcached-local-port-range
 
 - name: start and enable service
   service:
     name: memcached
     state: started
     enabled: true
-  tags: [configuration, memcached, memcached-start-enable-service]
+  tags:
+    - configuration
+    - memcached
+    - memcached-start-enable-service
