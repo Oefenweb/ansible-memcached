@@ -11,26 +11,18 @@
     - memcached
     - memcached-install
 
-- name: create (socket) directory
-  file:
-    path: "{{ memcached_socket_file | dirname }}"
-    state: directory
-    owner: "{{ memcached_user }}"
-    group: root
-    mode: 0755
-  when: memcached_socket_file is defined
-  tags:
-    - configuration
-    - memcached
-    - memcached-create-socket-directory
-
-- name: update configuration file
+- name: update configuration file(s)
   template:
-    src: etc/memcached.conf.j2
-    dest: /etc/memcached.conf
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     owner: root
     group: root
     mode: 0644
+  with_items:
+    - src: etc/default/memcached.j2
+      dest: /etc/default/memcached
+    - src: etc/memcached.conf.j2
+      dest: /etc/memcached.conf
   notify: restart memcached
   tags:
     - configuration
