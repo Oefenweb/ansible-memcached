@@ -44,10 +44,10 @@ before_install:
   - sudo apt-get update -qq
 
   # Install netcat
-  - sudo apt-get install netcat-traditional
+  - sudo apt-get install --yes netcat-traditional
 
   # Remove memcached
-  - sudo apt-get remove --purge memcached
+  - sudo apt-get remove --purge --yes memcached
 
 install:
   # Install Ansible.
