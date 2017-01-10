@@ -1,12 +1,15 @@
 #! /bin/bash
+#
+# {{ ansible_managed }}
+#
 ### BEGIN INIT INFO
 # Provides:            memcached
 # Required-Start:      $remote_fs $syslog
 # Required-Stop:       $remote_fs $syslog
-# Should-Start:                $local_fs
+# Should-Start:        $local_fs
 # Should-Stop:         $local_fs
 # Default-Start:       2 3 4 5
-# Default-Stop:                0 1 6
+# Default-Stop:        0 1 6
 # Short-Description:   Start memcached daemon
 # Description:         Start up memcached, a high-performance memory caching daemon
 ### END INIT INFO
@@ -33,6 +36,10 @@ DESC=memcached
 test -x $DAEMON || exit 0
 test -x $DAEMONBOOTSTRAP || exit 0
 
+{% if memcached_socket_file is defined %}
+install -d -o {{ memcached_user }} -g root -m 0775 {{ memcached_socket_file | dirname }} || exit 0
+{% endif %}
+
 set -e
 
 . /lib/lsb/init-functions
@@ -41,7 +48,7 @@ set -e
 ENABLE_MEMCACHED=no
 test -r /etc/default/memcached && . /etc/default/memcached
 
-
+{% raw %}
 FILES=(/etc/memcached_*.conf)
 # check for alternative config schema
 if [ -r "${FILES[0]}" ]; then
@@ -108,8 +115,8 @@ case "$1" in
        start-stop-daemon --stop --quiet --oknodo --retry 5 --pidfile $PIDFILE
        rm -f $PIDFILE
        if [ $ENABLE_MEMCACHED = yes ]; then
-       		start-stop-daemon --start --quiet --exec "$DAEMONBOOTSTRAP" -- /etc/${NAME}.conf $PIDFILE
-       		echo "$NAME."
+            start-stop-daemon --start --quiet --exec "$DAEMONBOOTSTRAP" -- /etc/${NAME}.conf $PIDFILE
+            echo "$NAME."
        else
             echo "$NAME disabled in /etc/default/memcached."
        fi
@@ -123,16 +130,17 @@ case "$1" in
        fi
        ;;
   *)
-	N=/etc/init.d/$NAME
-	echo "Usage: $N {start|stop|restart|force-reload|status}" >&2
-	exit 1
-	;;
+    N=/etc/init.d/$NAME
+    echo "Usage: $N {start|stop|restart|force-reload|status}" >&2
+    exit 1
+    ;;
 esac
 done;
 
 if [ "$er_or" -ne "0" ]
 then
-	exit 2
+    exit 2
 else
-	exit 0
+    exit 0
 fi
+{% endraw %}

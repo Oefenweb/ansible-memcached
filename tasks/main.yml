@@ -1,34 +1,5 @@
 # tasks file for memcached
 ---
-- name: install package
-  apt:
-    name: memcached
-    state: latest
-    update_cache: true
-    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  tags:
-    - configuration
-    - memcached
-    - memcached-install
-
-- name: update configuration file(s)
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: 0644
-  with_items:
-    - src: etc/default/memcached.j2
-      dest: /etc/default/memcached
-    - src: etc/memcached.conf.j2
-      dest: /etc/memcached.conf
-  notify: restart memcached
-  tags:
-    - configuration
-    - memcached
-    - memcached-configuration
-
 - name: set system file descriptor limit
   sysctl:
     name: fs.file-max
@@ -52,6 +23,52 @@
     - configuration
     - memcached
     - memcached-local-port-range
+
+- name: install package
+  apt:
+    name: "{{ item }}"
+    state: "{{ apt_install_state | default('latest') }}"
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  with_items: "{{ memcached_dependencies }}"
+  tags:
+    - configuration
+    - memcached
+    - memcached-install
+
+- name: update configuration file(s)
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - src: etc/default/memcached.j2
+      dest: /etc/default/memcached
+    - src: etc/memcached.conf.j2
+      dest: /etc/memcached.conf
+  notify: restart memcached
+  tags:
+    - configuration
+    - memcached
+    - memcached-configuration
+
+- include: service-initd.yml
+  when: (ansible_distribution == 'Ubuntu' and ansible_distribution_version | version_compare('15.04', '<') or ansible_distribution == 'Debian' and ansible_distribution_version | version_compare('8.0', '<'))
+  tags:
+    - configuration
+    - memcached
+    - memcached-configure
+    - memcached-configure-initd
+
+- include: service-systemd.yml
+  when: (ansible_distribution == 'Ubuntu' and ansible_distribution_version | version_compare('15.04', '>=') or ansible_distribution == 'Debian' and ansible_distribution_version | version_compare('8.0', '>='))
+  tags:
+    - configuration
+    - memcached
+    - memcached-configure
+    - memcached-configure-systemd
 
 - name: start and enable service
   service:
