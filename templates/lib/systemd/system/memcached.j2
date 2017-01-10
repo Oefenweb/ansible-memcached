@@ -1,0 +1,16 @@
+; {{ ansible_managed }}
+
+[Unit]
+Description=Start up memcached, a high-performance memory caching daemon
+After=network.target
+
+[Service]
+ExecStartPre=/usr/bin/test -x /usr/bin/memcached
+ExecStartPre=/usr/share/memcached/scripts/start-memcached
+{% if memcached_socket_file is defined %}
+ExecStartPre=/usr/bin/install -d -o {{ memcached_user }} -g root -m 0775 {{ memcached_socket_file | dirname }}
+{% endif %}
+ExecStart=/usr/share/memcached/scripts/systemd-memcached-wrapper /etc/memcached.conf
+
+[Install]
+WantedBy=multi-user.target

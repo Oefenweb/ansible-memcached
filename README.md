@@ -1,6 +1,6 @@
 ## memcached
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-memcached.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-memcached) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-memcached-blue.svg)](https://galaxy.ansible.com/list#/roles/1354)
+[![Build Status](https://travis-ci.org/Oefenweb/ansible-memcached.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-memcached) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-memcached-blue.svg)](https://galaxy.ansible.com/tersmitten/memcached)
 
 Set up a memcached server in Debian-like systems.
 
@@ -40,7 +40,7 @@ BSD
 
 #### Author Information
 
-Mischa ter Smitten (based on work of Benno Joy and Chris Churc)
+Mischa ter Smitten (based on work of [Benno Joy](https://github.com/bennojoy) and [Chris Churc](https://github.com/cchurch))
 
 #### Feedback, bug-reports, requests, ...
 

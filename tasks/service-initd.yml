@@ -1,0 +1,12 @@
+# tasks file for memcached
+---
+- name: configure | initd | update script
+  template:
+    src: etc/init.d/memcached.j2
+    dest: /etc/init.d/memcached
+    owner: root
+    group: root
+    mode: 0755
+  notify: restart memcached
+  tags:
+    - memcached-configure-initd-update

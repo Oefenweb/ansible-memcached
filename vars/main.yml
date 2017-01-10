@@ -1,3 +1,5 @@
 # vars file for memcached
 ---
+memcached_dependencies:
+  - memcached
 memcached_user: "{{ 'memcache' if ansible_distribution == 'Ubuntu' and ansible_distribution_version | version_compare('12.04', '>=') else 'nobody' }}"

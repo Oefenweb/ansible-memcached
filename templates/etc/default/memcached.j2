@@ -2,7 +2,3 @@
 
 # Set this to no to disable memcached.
 ENABLE_MEMCACHED=yes
-
-{% if memcached_socket_file is defined %}
-install -d -o {{ memcached_user }} -g root -m 0775 {{ memcached_socket_file | dirname }} || true
-{% endif %}
