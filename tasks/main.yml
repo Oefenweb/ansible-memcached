@@ -79,3 +79,6 @@
     - configuration
     - memcached
     - memcached-start-enable-service
+
+- name: ensure we are restarted before any dependent roles require the service
+  meta: flush_handlers
