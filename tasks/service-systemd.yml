@@ -2,8 +2,8 @@
 ---
 - name: configure | systemd | update script
   template:
-    src: templates/lib/systemd/system/memcached.j2
-    dest: /lib/systemd/system/memcached.service
+    src: etc/systemd/system/memcached.j2
+    dest: /etc/systemd/system/memcached.service
     owner: root
     group: root
     mode: 0644
