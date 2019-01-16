@@ -6,7 +6,7 @@
     value: "{{ memcached_fs_file_max }}"
     reload: true
     state: present
-  when: memcached_fs_file_max != false
+  when: memcached_fs_file_max
   tags:
     - configuration
     - memcached
@@ -18,7 +18,7 @@
     value: "{{ memcached_net_ipv4_ip_local_port_range }}"
     reload: true
     state: present
-  when: memcached_net_ipv4_ip_local_port_range != false
+  when: memcached_net_ipv4_ip_local_port_range
   tags:
     - configuration
     - memcached
@@ -26,11 +26,10 @@
 
 - name: install package
   apt:
-    name: "{{ item }}"
+    name: "{{ memcached_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  with_items: "{{ memcached_dependencies }}"
   tags:
     - configuration
     - memcached

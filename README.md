@@ -10,6 +10,9 @@ None
 
 #### Variables
 
+ * `memcached_fs_file_max` [default: `false`]: The system file descriptor limit
+ * `memcached_net_ipv4_ip_local_port_range` [default: `false`]: The system IP port limits
+ 
  * `memcached_logfile` [default: `/var/log/memcached.log`]: Log output to
  * `memcached_socket_file` [optional]: Unix socket path to listen on (disables network support) (e.g. `/run/memcached/memcached.sock`)
  * `memcached_socket_perms` [optional, default: `0666`]: Permissions (in octal format) for Unix socket created
@@ -17,8 +20,6 @@ None
  * `memcached_port` [default: `11211`]: The port on which the server should be listening
  * `memcached_max_connections` [default: `1024`]: The number of max concurrent connections it should accept
  * `memcached_memory_cap` [default: `64`]: The memory cap
- * `memcached_fs_file_max` [default: `false`]: The system file descriptor limit
- * `memcached_net_ipv4_ip_local_port_range` [default: `false`]: The system IP port limits
  * `memcached_options` [default: `''`]: Extra command line options for memcached
 
 ## Dependencies
