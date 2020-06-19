@@ -3,3 +3,8 @@
 memcached_dependencies:
   - memcached
 memcached_user: memcache
+
+memcached_etc_default_file: /etc/default/memcached
+memcached_etc_conf_file: /etc/memcached.conf
+memcached_etc_init_d_file: /etc/init.d/memcached
+memcached_etc_systemd_file: /etc/systemd/system/memcached.service

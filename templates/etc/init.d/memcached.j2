@@ -44,9 +44,9 @@ set -e
 
 . /lib/lsb/init-functions
 
-# Edit /etc/default/memcached to change this.
+# Edit {{ memcached_etc_default_file }} to change this.
 ENABLE_MEMCACHED=no
-test -r /etc/default/memcached && . /etc/default/memcached
+test -r {{ memcached_etc_default_file }} && . {{ memcached_etc_default_file }}
 
 {% raw %}
 FILES=(/etc/memcached_*.conf)
@@ -95,7 +95,7 @@ case "$1" in
             start-stop-daemon --start --quiet --exec "$DAEMONBOOTSTRAP" -- /etc/${NAME}.conf $PIDFILE
             echo "$NAME."
        else
-            echo "$NAME disabled in /etc/default/memcached."
+            echo "$NAME disabled in {{ memcached_etc_default_file }}."
        fi
        ;;
   stop)
@@ -118,7 +118,7 @@ case "$1" in
             start-stop-daemon --start --quiet --exec "$DAEMONBOOTSTRAP" -- /etc/${NAME}.conf $PIDFILE
             echo "$NAME."
        else
-            echo "$NAME disabled in /etc/default/memcached."
+            echo "$NAME disabled in {{ memcached_etc_default_file }}."
        fi
        ;;
   status)

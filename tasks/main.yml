@@ -43,10 +43,10 @@
     group: root
     mode: 0644
   with_items:
-    - src: etc/default/memcached.j2
-      dest: /etc/default/memcached
-    - src: etc/memcached.conf.j2
-      dest: /etc/memcached.conf
+    - src: "{{ memcached_etc_default_file.lstrip('/') }}.j2"
+      dest: "{{ memcached_etc_default_file }}"
+    - src: "{{ memcached_etc_conf_file.lstrip('/') }}.j2"
+      dest: "{{ memcached_etc_conf_file }}"
   notify: restart memcached
   tags:
     - configuration

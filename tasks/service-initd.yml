@@ -2,8 +2,8 @@
 ---
 - name: configure | initd | update script
   template:
-    src: etc/init.d/memcached.j2
-    dest: /etc/init.d/memcached
+    src: "{{ memcached_etc_init_d_file.lstrip('/') }}.j2"
+    dest: "{{ memcached_etc_init_d_file }}"
     owner: root
     group: root
     mode: 0755

@@ -10,7 +10,7 @@ ExecStartPre=/usr/share/memcached/scripts/start-memcached
 {% if memcached_socket_file is defined %}
 ExecStartPre=/usr/bin/install -d -o {{ memcached_user }} -g root -m 0775 {{ memcached_socket_file | dirname }}
 {% endif %}
-ExecStart=/usr/share/memcached/scripts/systemd-memcached-wrapper /etc/memcached.conf
+ExecStart=/usr/share/memcached/scripts/systemd-memcached-wrapper {{ memcached_etc_conf_file }}
 
 [Install]
 WantedBy=multi-user.target
