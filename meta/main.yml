@@ -1,6 +1,7 @@
-# meta file for memcached
+# meta file
 ---
 galaxy_info:
+  namespace: oefenweb
   role_name: memcached
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.

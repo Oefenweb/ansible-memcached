@@ -1,4 +1,4 @@
-# vars file for memcached
+# vars file
 ---
 memcached_dependencies:
   - memcached

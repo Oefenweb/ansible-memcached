@@ -1,4 +1,4 @@
-# handlers file for memcached
+# handlers file
 ---
 - name: restart memcached
   service:

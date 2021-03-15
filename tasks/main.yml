@@ -1,4 +1,4 @@
-# tasks file for memcached
+# tasks file
 ---
 - name: set system file descriptor limit
   sysctl:

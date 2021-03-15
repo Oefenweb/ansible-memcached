@@ -1,4 +1,4 @@
-# defaults file for memcached
+# defaults file
 ---
 memcached_logfile: /var/log/memcached.log
 memcached_host: 127.0.0.1

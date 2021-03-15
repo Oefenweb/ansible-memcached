@@ -1,4 +1,4 @@
-# tasks file for memcached
+# tasks file
 ---
 - name: configure | systemd | update script
   template:

@@ -1,4 +1,4 @@
-# tasks file for memcached
+# tasks file
 ---
 - name: configure | initd | update script
   template:
