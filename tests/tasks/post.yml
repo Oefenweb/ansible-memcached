@@ -1,0 +1,21 @@
+# post test file
+---
+- name: install dependencies
+  apt:
+    name:
+      - netcat-traditional
+    state: "{{ apt_install_state | default('latest') }}"
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+
+- name: test memcached installation
+  shell: >
+    echo stats | nc -q 1 {{ memcached_host }} {{ memcached_port }}
+    | grep -q 'STAT'
+    && (echo 'Availability test: pass' && exit 0)
+    || (echo 'Availability test: fail' && exit 1)
+  args:
+    warn: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint

@@ -6,8 +6,8 @@ After=network.target
 
 [Service]
 ExecStartPre=/usr/bin/test -x /usr/bin/memcached
-ExecStartPre=/usr/share/memcached/scripts/start-memcached
 {% if memcached_socket_file is defined %}
+PermissionsStartOnly=true
 ExecStartPre=/usr/bin/install -d -o {{ memcached_user }} -g root -m 0775 {{ memcached_socket_file | dirname }}
 {% endif %}
 ExecStart=/usr/share/memcached/scripts/systemd-memcached-wrapper {{ memcached_etc_conf_file }}
