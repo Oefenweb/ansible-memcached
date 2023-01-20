@@ -1,7 +1,7 @@
 # handlers file
 ---
 - name: restart memcached
-  service:
+  ansible.builtin.service:
     name: memcached
     state: restarted
   when: service_default_state | default('started') == 'started'

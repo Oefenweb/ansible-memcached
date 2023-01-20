@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: set system file descriptor limit
-  sysctl:
+  ansible.posix.sysctl:
     name: fs.file-max
     value: "{{ memcached_fs_file_max }}"
     reload: true
@@ -13,7 +13,7 @@
     - memcached-fs-file-max
 
 - name: set system ip port limits
-  sysctl:
+  ansible.posix.sysctl:
     name: net.ipv4.ip_local_port_range
     value: "{{ memcached_net_ipv4_ip_local_port_range }}"
     reload: true
@@ -24,8 +24,8 @@
     - memcached
     - memcached-local-port-range
 
-- name: install package
-  apt:
+- name: install package  # noqa args[module]
+  ansible.builtin.apt:
     name: "{{ memcached_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
@@ -36,7 +36,7 @@
     - memcached-install
 
 - name: update configuration file(s)
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: root
@@ -53,7 +53,8 @@
     - memcached
     - memcached-configuration
 
-- include: service-initd.yml
+- name: initd
+  ansible.builtin.import_tasks: service-initd.yml
   when: ansible_service_mgr != 'systemd'
   tags:
     - configuration
@@ -61,7 +62,8 @@
     - memcached-configure
     - memcached-configure-initd
 
-- include: service-systemd.yml
+- name: systemd
+  ansible.builtin.import_tasks: service-systemd.yml
   when: ansible_service_mgr == 'systemd'
   tags:
     - configuration
@@ -70,7 +72,7 @@
     - memcached-configure-systemd
 
 - name: start and enable service
-  service:
+  ansible.builtin.service:
     name: memcached
     state: "{{ service_default_state | default('started') }}"
     enabled: "{{ service_default_enabled | default(true) | bool }}"
