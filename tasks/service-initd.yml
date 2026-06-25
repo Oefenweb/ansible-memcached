@@ -6,7 +6,7 @@
     dest: "{{ memcached_etc_init_d_file }}"
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
   notify: restart memcached
   tags:
     - memcached-configure-initd-update
