@@ -41,7 +41,7 @@
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   with_items:
     - src: "{{ memcached_etc_default_file.lstrip('/') }}.j2"
       dest: "{{ memcached_etc_default_file }}"
@@ -55,7 +55,7 @@
 
 - name: initd
   ansible.builtin.import_tasks: service-initd.yml
-  when: ansible_service_mgr != 'systemd'
+  when: ansible_facts['service_mgr'] != 'systemd'
   tags:
     - configuration
     - memcached
@@ -64,7 +64,7 @@
 
 - name: systemd
   ansible.builtin.import_tasks: service-systemd.yml
-  when: ansible_service_mgr == 'systemd'
+  when: ansible_facts['service_mgr'] == 'systemd'
   tags:
     - configuration
     - memcached

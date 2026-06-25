@@ -1,4 +1,4 @@
-; {{ ansible_managed }}
+{{ ansible_managed | comment(decoration='; ') }}
 
 [Unit]
 Description=Start up memcached, a high-performance memory caching daemon
